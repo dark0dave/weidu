@@ -3332,7 +3332,9 @@ P Q R 3
     Guard-values are either \ttref{value}s or literal
     expressions. Values are evaluated, including for variables and the
     array construct, and the result is case-insensitively matched as a
-    \ttref{regexp} against the match-value.
+    \ttref{regexp} against the match-value. Note that regexp-matching
+    requires the match-length to equal the string-length, unlike most
+    other regexp matching in \t{TP2}.
 
     Condition-values must be \ttref{value}s and must evaluate to integers.
 
