@@ -1,0 +1,12 @@
+export ARCHOS    = x86_LINUX
+export OBJEXT    = o
+export ARCH_FILE = arch_unix
+export ELKHOUND_BIN = elkhound
+export CASE_FILE = case_ins_linux
+export GLOB      = glob_unix
+export WEIDU_ARCH = amd64
+export WEIDU_OS = unix
+export USEOPT = .opt
+export OCAMLDIR = /home/opam/.opam/4.08/bin
+PROJECT_CMODULES = nix
+export COMPILEFLAGS = -w y -ccopt -w
