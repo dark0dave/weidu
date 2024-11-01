@@ -24,7 +24,7 @@ include Configuration
 
 # Just a target to be used by default
 .PHONY: weidu doc all
-all : weidu
+all : elkhound weidu
 # "make weinstall" if you want weinstall
 
 ####
@@ -44,6 +44,22 @@ VERSION_MINOR := $(shell grep 'version =' src/version.ml | cut -d'"' -f2 | cut -
 # Put here all the byproducts of make
 OBJDIR      := obj/$(ARCHOS)
 DEPENDDIR   := obj/.depend
+
+# Now the rule to make ELKHOUND
+
+ELKHOUND_DIR       = elkhound_src
+ELKHOUND_SRC_DIR   = $(ELKHOUND_DIR)/src
+ELKHOUND_BUILD_DIR = build/elkhound
+ELKHOUND           = $(ELKHOUND_BUILD_DIR)/elkhound/elkhound
+
+.PHONY: elkhound
+elkhound:
+ifeq ("$(wildcard $(ELKHOUND))","")
+	echo "Building ELKHOUND"
+	mkdir -p $(ELKHOUND_BUILD_DIR)
+	cmake -Wno-dev -B $(ELKHOUND_BUILD_DIR) -S $(ELKHOUND_SRC_DIR) -DCMAKE_BUILD_TYPE=Release
+	PATH="${PATH}":$(OCAMLDIR) make -j6 -C $(ELKHOUND_BUILD_DIR)
+endif
 
 include Depends
 
@@ -161,7 +177,8 @@ clean:
 	src/*parser*.ml src/*parser*.mli src/*lexer*.ml src/*lexer*.mli src/*.cmi \
 	src/tlexer.mll src/trealparserin.gr  \
 	src/toldlexer.mll src/tph.ml
-	find obj -exec rm {} \; || true
+	rm -rf obj/* || true
+	rm -rf $(ELKHOUND_BUILD_DIR) || true
 
 
 ###

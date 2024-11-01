@@ -119,7 +119,6 @@
 CAMLLEX = $(OCAMLDIR)/ocamllex
 CAMLYACC= $(OCAMLDIR)/ocamlyacc
 CAMLDEP = $(OCAMLDIR)/ocamldep
-ELKHOUND= $(shell which $(ELKHOUND_BIN))
 
 CAMLFLAGS    =-I $(OBJDIR)
 
@@ -203,7 +202,7 @@ export EXE
 
 
 
-    # Allow searching for .ml and .mli
+# Allow searching for .ml and .mli
 vpath %.mll $(SOURCEDIRS)
 vpath %.mly $(SOURCEDIRS)
 vpath %.ml  $(SOURCEDIRS) $(OBJDIR)
@@ -342,10 +341,12 @@ $(DEPENDDIR)/%.di: %.mli
 	$(ECHO)$(CAMLDEP) $(DEPINCLUDES) $< | $(FIXDEPEND) > $@
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(MAKECMDGOALS),elkhound)
 ifneq ($(MAKECMDGOALS),doc)
 ifneq ($(MAKECMDGOALS),src_zip)
 -include $(MODULES:%=$(DEPENDDIR)/%.d)
 -include $(MODULES:%=$(DEPENDDIR)/%.di)
+endif
 endif
 endif
 endif

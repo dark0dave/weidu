@@ -1,0 +1,4 @@
+[submodule "elkhound_src"]
+	path = elkhound_src
+	url = https://github.com/WeiDUorg/elkhound.git
+	branch = master
