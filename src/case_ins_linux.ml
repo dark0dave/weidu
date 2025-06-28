@@ -6,10 +6,9 @@ open Hashtblinit
 
 let case_exact = ref false
 
-let case_transform s =
-  if not !case_exact then
-    String.lowercase s
-  else s
+external fcase : string -> string = "fcase"
+
+let case_transform s = fcase s
 
 (* Pervasives FS calls *)
 let backslash_to_slash s =

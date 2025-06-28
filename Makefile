@@ -58,6 +58,7 @@ PROJECT_CMODULES   = reg
 PROJECT_CLIBS      = -ladvapi32
 endif
 #PROJECT_CMODULES   += eff_strings
+PROJECT_CMODULES   += fcase
 PROJECT_CMODULES   += zlib adler32 inflate uncompr inftrees zutil inffast $(GLOB) xdiff
 PROJECT_CMODULES   += xemit xpatchi xutils xdiffi xprepare $(ARCH_C_FILES)
 PROJECT_CMODULES   += crc32 compress deflate trees
@@ -161,7 +162,7 @@ clean:
 	src/*parser*.ml src/*parser*.mli src/*lexer*.ml src/*lexer*.mli src/*.cmi \
 	src/tlexer.mll src/trealparserin.gr  \
 	src/toldlexer.mll src/tph.ml
-	find obj -exec rm {} \; || true
+	find obj -type f -exec rm -f {} \; || true
 
 
 ###
