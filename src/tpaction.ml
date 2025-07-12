@@ -472,6 +472,10 @@ let rec process_action_real our_lang game this_tp2_filename tp a =
           log_and_print "Clearing the arrays.\n" ;
           Var.clear_arr () ;
 
+      | TP_MergeArrays(array1, array2) ->
+          log_and_print "Merging the arrays.\n" ;
+          Var.merge_arr (array1, array2) ;
+  
       | TP_ClearCodes ->
           log_and_print "Clearing the macros.\n" ;
           clear_codes () ;

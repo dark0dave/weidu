@@ -174,6 +174,12 @@ let clear_arr () =
   Hashtbl.iter (fun a b -> Hashtbl.remove !arrays a) arr_spec ;
   Hashtbl.clear !arrays
 
+let merge_arr (array1, array2) =
+  let array = Hashtbl.create(Hashtbl.length(array1) + Hashtbl.length( array1)) in
+  Hashtbl.iter (fun a b -> Hashtbl.add array a b) array1;
+  Hashtbl.iter (fun a b -> Hashtbl.add array a b) array2;
+  array
+
 let assoc name value =
   let value = Int32.of_int value in
   Hashtbl.replace !variables name (Int32 value)
